@@ -23,7 +23,7 @@ func TestTemplate(t *testing.T) {
 
 	test_structure.RunTestStage(t, "validate", func() {
 		output := terraform.Output(t, terraformOptions, "greeting")
-		assert.Equal(t, "Hello, terraform-kubernetes-repo-template!", output)
+		assert.Equal(t, "Hello, nextjs-grpc-infra-app!", output)
 	})
 
 	test_structure.RunTestStage(t, "teardown", func() {

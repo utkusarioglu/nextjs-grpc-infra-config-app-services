@@ -11,8 +11,8 @@ services:
 
 volumes:
   vscode-extensions:
-    name: terraform-kubernetes-repo-template-vscode-extensions
+    name: nextjs-grpc-infra-app-vscode-extensions
   vscode-extensions-insiders:
-    name: terraform-kubernetes-repo-template-vscode-extensions-insiders
+    name: nextjs-grpc-infra-app-vscode-extensions-insiders
   go:
-    name: terraform-kubernetes-repo-template-go
+    name: nextjs-grpc-infra-app-go

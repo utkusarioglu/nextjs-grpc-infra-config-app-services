@@ -1,4 +1,4 @@
-module utkusarioglu.com/templates/terraform-kubernetes-repo-template
+module utkusarioglu.com/projects/nextjs-grpc-infra-app
 
 go 1.18
 
