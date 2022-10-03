@@ -25,3 +25,8 @@ variable "environment" {
     error_message = "Allowed values for variable `environment` are: local, aws"
   }
 }
+
+variable "ingress_sg" {
+  type = string
+  description = "Ingress security group"
+}

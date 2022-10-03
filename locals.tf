@@ -3,4 +3,16 @@ locals {
     "aws"   = "alb"
     "local" = "public"
   }
+  
+  ingress_paths = {
+    api = {
+      aws = "/*"
+      local = "/"
+    }
+  }
+
+  ingress_service_types = {
+    aws = "NodePort"
+    local = "ClusterIP"
+  }
 }

@@ -7,14 +7,8 @@ resource "helm_release" "api" {
   timeout           = var.helm_timeout_unit
   atomic            = var.helm_atomic
   depends_on = [
-    helm_release.certificates[0],
     helm_release.ms[0]
   ]
-
-  set {
-    name  = "cloudProvider.isLocal"
-    value = "true"
-  }
 
   set {
     name  = "env.MS_HOST"
@@ -23,7 +17,6 @@ resource "helm_release" "api" {
 
   set {
     name = "env.OTEL_TRACE_HOST"
-    # value = "otel-trace-opentelemetry-collector.observability"
     value = "otel-trace-collector.observability"
   }
 
@@ -54,11 +47,26 @@ resource "helm_release" "api" {
 
   set {
     name  = "ingress.hosts[0].paths[0].path"
-    value = "/"
+    value = local.ingress_paths.api[var.environment]
   }
 
   set {
     name  = "ingress.hosts[0].paths[0].pathType"
     value = "ImplementationSpecific"
+  }
+  
+  set {
+    name = "ingress.annotations.${replace("alb.ingress.kubernetes.io/security-groups", ".", "\\.")}"
+    value = var.ingress_sg
+  }
+
+  set {
+    name = "grafana.ingress.annotations.${replace("external-dns.alpha.kubernetes.io/hostname", ".", "\\.")}"
+    value = "${var.sld}.${var.tld}"
+  }
+
+  set {
+    name = "service.type"
+    value = local.ingress_service_types[var.environment]
   }
 }

@@ -1,6 +1,6 @@
 resource "helm_release" "grafana" {
   // TODO this is off on kubernetes 1.25 because of podSecurityPolicy deprecation
-  count             = 0
+  count             = 1
   name              = "grafana"
   chart             = "${local.project_root_path}/grafana"
   dependency_update = true
@@ -12,5 +12,25 @@ resource "helm_release" "grafana" {
   set {
     name  = "grafana.ingress.hosts"
     value = "{grafana.${var.sld}.${var.tld}}"
+  }
+
+  set {
+    name  = "grafana.ingress.annotations.${replace("kubernetes.io/ingress.class", ".", "\\.")}"
+    value = local.ingress_class_mapping[var.environment]
+  }
+
+  set {
+    name = "grafana.ingress.annotations.${replace("alb.ingress.kubernetes.io/security-groups", ".", "\\.")}"
+    value = var.ingress_sg
+  }
+
+  set {
+    name = "grafana.ingress.annotations.${replace("external-dns.alpha.kubernetes.io/hostname", ".", "\\.")}"
+    value = "grafana.${var.sld}.${var.tld}"
+  }
+
+  set {
+    name = "grafana.service.type"
+    value = local.ingress_service_types[var.environment]
   }
 }

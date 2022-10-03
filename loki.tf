@@ -1,6 +1,6 @@
 resource "helm_release" "loki" {
   // TODO this is off on kubernetes 1.25 because of podSecurityPolicy deprecation
-  count = 0
+  count = 1
   name  = "loki"
   chart = "${local.project_root_path}/loki"
   # chart             = "loki"

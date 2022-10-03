@@ -1,5 +1,5 @@
 resource "helm_release" "prometheus" {
-  count             = 1
+  count             = 0
   name              = "prometheus"
   chart             = "${local.project_root_path}/prometheus"
   dependency_update = true

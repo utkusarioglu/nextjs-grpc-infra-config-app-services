@@ -6,9 +6,9 @@ resource "helm_release" "ms" {
   namespace         = "ms"
   timeout           = var.helm_timeout_unit
   atomic            = var.helm_atomic
-  depends_on = [
-    helm_release.certificates[0]
-  ]
+  # depends_on = [
+  #   helm_release.certificates[0]
+  # ]
 
   set {
     name  = "cloudProvider.isLocal"
