@@ -3,6 +3,8 @@ version: "3.9"
 services:
   terraform:
     container_name: nextjs-grpc-infra-app
-    image: utkusarioglu/terraform-kubernetes-devcontainer:1.2.13
+    image: utkusarioglu/tf-k8s-devcontainer:1.2.15
     volumes:
-      - ../../..:/utkusarioglu-com/projects/nextjs-grpc
+      - type: bind
+        source: ../../../..
+        target: /utkusarioglu-com/projects/nextjs-grpc
