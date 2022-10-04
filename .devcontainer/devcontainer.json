@@ -5,7 +5,7 @@
     "docker-compose.yml"
   ],
   "service": "terraform",
-  "workspaceFolder": "/utkusarioglu-com/projects/nextjs-grpc/infra/app",
+  "workspaceFolder": "/utkusarioglu-com/projects/nextjs-grpc/infra/configs/app",
   "customizations": {
     "vscode": {
       "extensions": [
