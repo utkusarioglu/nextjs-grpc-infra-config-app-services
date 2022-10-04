@@ -1,18 +1,26 @@
 version: "3.9"
 services:
-  terraform:
-    volumes:
-      - vscode-extensions:/root/.vscode-server/extensions
-      - vscode-extensions-insiders:/root/.vscode-server-insiders/extensions
-      - ~/.config/gh:/terratest/.config/gh:ro
-      - ~/.kube/config:/terratest/.kube/config
-      - go:/go
+  nextjs-grpc-infra-config-app:
     command: /bin/sh -c "while sleep 1000; do :; done"
+    volumes:
+      - type: volume
+        source: vscode-extensions
+        target: /root/.vscode-server/extensions
+      - type: volume
+        source: vscode-extensions-insiders
+        target: /root/.vscode-server-insiders/extensions
+      - type: bind
+        source: ~/.config/gh
+        target: /home/terraform/.config/gh
+        read_only: true
+      - type: volume
+        source: go
+        target: /go
 
 volumes:
   vscode-extensions:
-    name: nextjs-grpc-infra-app-vscode-extensions
+    name: nextjs-grpc-infra-config-app-vscode-extensions
   vscode-extensions-insiders:
-    name: nextjs-grpc-infra-app-vscode-extensions-insiders
+    name: nextjs-grpc-infra-config-app-vscode-extensions-insiders
   go:
-    name: nextjs-grpc-infra-app-go
+    name: nextjs-grpc-infra-config-app-go

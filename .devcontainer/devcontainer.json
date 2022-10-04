@@ -1,18 +1,15 @@
 {
-  "name": "app.infra.nextjs-grpc.projects.utkusarioglu.com",
+  "name": "app.configs.infra.nextjs-grpc.projects.utkusarioglu.com",
   "dockerComposeFile": [
     "../.docker/docker-compose.dev.yml",
     "docker-compose.yml"
   ],
-  "service": "terraform",
+  "postCreateCommand": "scripts/post-create-command.sh",
+  "service": "nextjs-grpc-infra-config-app",
   "workspaceFolder": "/utkusarioglu-com/projects/nextjs-grpc/infra/configs/app",
   "customizations": {
     "vscode": {
-      "extensions": [
-        "golang.go",
-        "hashicorp.terraform",
-        "ms-kubernetes-tools.vscode-kubernetes-tools"
-      ],
+      "extensions": ["golang.go", "hashicorp.terraform"],
       "settings": {
         "workbench.colorCustomizations": {
           "activityBar.background": "#4a365a"

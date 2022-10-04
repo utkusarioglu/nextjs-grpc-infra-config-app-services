@@ -1,4 +1,4 @@
-module utkusarioglu.com/projects/nextjs-grpc-infra-app
+module utkusarioglu.com/projects/nextjs-grpc-infra-config-app
 
 go 1.18
 
