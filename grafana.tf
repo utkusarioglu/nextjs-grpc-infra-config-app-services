@@ -20,17 +20,17 @@ resource "helm_release" "grafana" {
   }
 
   set {
-    name = "grafana.ingress.annotations.${replace("alb.ingress.kubernetes.io/security-groups", ".", "\\.")}"
+    name  = "grafana.ingress.annotations.${replace("alb.ingress.kubernetes.io/security-groups", ".", "\\.")}"
     value = var.ingress_sg
   }
 
   set {
-    name = "grafana.ingress.annotations.${replace("external-dns.alpha.kubernetes.io/hostname", ".", "\\.")}"
+    name  = "grafana.ingress.annotations.${replace("external-dns.alpha.kubernetes.io/hostname", ".", "\\.")}"
     value = "grafana.${var.sld}.${var.tld}"
   }
 
   set {
-    name = "grafana.service.type"
+    name  = "grafana.service.type"
     value = local.ingress_service_types[var.environment]
   }
 }

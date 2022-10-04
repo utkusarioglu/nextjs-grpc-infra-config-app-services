@@ -27,6 +27,6 @@ variable "environment" {
 }
 
 variable "ingress_sg" {
-  type = string
+  type        = string
   description = "Ingress security group"
 }

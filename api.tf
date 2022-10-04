@@ -16,7 +16,7 @@ resource "helm_release" "api" {
   }
 
   set {
-    name = "env.OTEL_TRACE_HOST"
+    name  = "env.OTEL_TRACE_HOST"
     value = "otel-trace-collector.observability"
   }
 
@@ -54,19 +54,19 @@ resource "helm_release" "api" {
     name  = "ingress.hosts[0].paths[0].pathType"
     value = "ImplementationSpecific"
   }
-  
+
   set {
-    name = "ingress.annotations.${replace("alb.ingress.kubernetes.io/security-groups", ".", "\\.")}"
+    name  = "ingress.annotations.${replace("alb.ingress.kubernetes.io/security-groups", ".", "\\.")}"
     value = var.ingress_sg
   }
 
   set {
-    name = "grafana.ingress.annotations.${replace("external-dns.alpha.kubernetes.io/hostname", ".", "\\.")}"
+    name  = "grafana.ingress.annotations.${replace("external-dns.alpha.kubernetes.io/hostname", ".", "\\.")}"
     value = "${var.sld}.${var.tld}"
   }
 
   set {
-    name = "service.type"
+    name  = "service.type"
     value = local.ingress_service_types[var.environment]
   }
 }
