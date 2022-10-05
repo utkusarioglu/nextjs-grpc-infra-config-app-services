@@ -9,3 +9,13 @@ variable "helm_timeout_unit" {
 variable "helm_atomic" {
   type = bool
 }
+
+variable "sld" {
+  description = "Second level domain"
+  type        = string
+}
+
+variable "tld" {
+  description = "Top level domain: Ex: com of www.google.com"
+  type        = string
+}

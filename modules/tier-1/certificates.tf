@@ -6,6 +6,11 @@ resource "helm_release" "certificates" {
   timeout           = var.helm_timeout_unit
   atomic            = var.helm_atomic
 
+  set {
+    name  = "publicDomainName"
+    value = "${var.sld}.${var.tld}"
+  }
+
   depends_on = [
     helm_release.cert_manager[0]
   ]
