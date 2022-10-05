@@ -1,5 +1,5 @@
 resource "helm_release" "rbac" {
-  count             = 1
+  count             = 0
   name              = "rbac"
   chart             = "${var.project_root_path}/rbac"
   dependency_update = true
