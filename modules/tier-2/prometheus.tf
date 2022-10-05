@@ -1,5 +1,5 @@
 resource "helm_release" "prometheus" {
-  count             = 0
+  count             = 1
   name              = "prometheus"
   chart             = "${local.project_root_path}/prometheus"
   dependency_update = true
@@ -10,5 +10,20 @@ resource "helm_release" "prometheus" {
   set {
     name  = "prometheus.server.ingress.hosts"
     value = "{prometheus.${var.sld}.${var.tld}}"
+  }
+
+  set {
+    name  = "prometheus.server.ingress.annotations.${replace("kubernetes.io/ingress.class", ".", "\\.")}"
+    value = local.ingress_class_mapping[var.environment]
+  }
+
+  set {
+    name  = "prometheus.server.ingress.annotations.${replace("alb.ingress.kubernetes.io/security-groups", ".", "\\.")}"
+    value = var.ingress_sg
+  }
+
+  set {
+    name  = "prometheus.server.ingress.annotations.${replace("external-dns.alpha.kubernetes.io/hostname", ".", "\\.")}"
+    value = "prometheus.${var.sld}.${var.tld}"
   }
 }

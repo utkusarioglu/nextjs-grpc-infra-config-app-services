@@ -7,8 +7,16 @@ resource "helm_release" "jaeger" {
   timeout           = var.helm_timeout_unit
   atomic            = var.helm_atomic
 
-  set {
-    name  = "ingress.hosts"
-    value = "{jaeger.${var.sld}.${var.tld}}"
-  }
+  values = [
+    yamlencode({
+      ingress = {
+        hosts = [
+          "jaeger.${var.sld}.${var.tld}"
+        ]
+        ingressClass        = local.ingress_class_mapping[var.environment]
+        awsSecurityGroups   = var.ingress_sg
+        externalDnsHostname = "jaeger.${var.sld}.${var.tld}"
+      }
+    })
+  ]
 }
