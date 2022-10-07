@@ -9,7 +9,7 @@ resource "helm_release" "cert_manager" {
   atomic            = var.helm_atomic
   version           = "v1.9.0"
   depends_on = [
-    helm_release.namespaces[0]
+    kubernetes_namespace.all["cert-manager"]
   ]
 
   set {

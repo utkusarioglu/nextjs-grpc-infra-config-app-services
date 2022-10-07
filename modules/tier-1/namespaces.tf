@@ -1,7 +1,6 @@
-resource "helm_release" "namespaces" {
-  count             = 1
-  name              = "namespaces"
-  chart             = "${var.project_root_path}/namespaces"
-  dependency_update = true
-  atomic            = true
+resource "kubernetes_namespace" "all" {
+  for_each = toset(["api", "ms", "observability", "cert-manager"])
+  metadata {
+    name = each.key
+  }
 }

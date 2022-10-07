@@ -6,6 +6,9 @@ resource "helm_release" "secrets" {
   atomic            = true
 
   depends_on = [
-    helm_release.namespaces[0]
+    kubernetes_namespace.all["api"],
+    kubernetes_namespace.all["ms"],
+    kubernetes_namespace.all["observability"],
+    kubernetes_namespace.all["cert-manager"],
   ]
 }
