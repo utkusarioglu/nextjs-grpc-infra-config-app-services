@@ -3,7 +3,7 @@ version: "3.9"
 services:
   nextjs-grpc-infra-config-app:
     container_name: nextjs-grpc-infra-config-app
-    image: utkusarioglu/tf-devcontainer:1.2.15
+    image: utkusarioglu/tf-devcontainer:1.2.17
     environment:
       TZ: Etc/UTC0
     volumes:
