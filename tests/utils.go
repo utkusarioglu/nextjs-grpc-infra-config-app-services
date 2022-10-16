@@ -1,4 +1,4 @@
-package test
+package tests
 
 import (
 	"fmt"
@@ -24,7 +24,7 @@ func retrieveVarFiles(t *testing.T) []string {
 		isTfVars := strings.HasSuffix(filename, ".tfvars")
 		isTfVarsJson := strings.HasSuffix(filename, ".tfvars.json")
 		isExample := strings.HasSuffix(filename, ".example")
-		environment := environment.GetFirstNonEmptyEnvVarOrFatal(t, []string {"ENVIRONMENT"})
+		environment := environment.GetFirstNonEmptyEnvVarOrFatal(t, []string{"ENVIRONMENT"})
 		isOfCurrentEnvironment := strings.Contains(filename, fmt.Sprintf(".%s.", environment))
 		if !isDisabled && (isTfVars || isTfVarsJson) && !isExample && isOfCurrentEnvironment {
 			varFiles = append(varFiles, fmt.Sprintf("%s/%s", varsFolder, filename))
