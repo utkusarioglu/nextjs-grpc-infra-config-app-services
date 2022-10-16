@@ -55,3 +55,7 @@ services:
         source: ../../../../secrets
         target: /utkusarioglu-com/projects/nextjs-grpc/secrets
         read_only: true
+      - type: bind
+        source: ../../../../e2e
+        target: /utkusarioglu-com/projects/nextjs-grpc/e2e
+        read_only: true
