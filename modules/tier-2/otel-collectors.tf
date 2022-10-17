@@ -1,5 +1,5 @@
 resource "helm_release" "otel_collectors" {
-  count             = 1
+  count             = local.deployment_configs.otel_collectors.count
   name              = "otel-collectors"
   chart             = "${local.project_root_path}/otel-collectors"
   dependency_update = true

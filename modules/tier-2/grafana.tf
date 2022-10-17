@@ -1,6 +1,6 @@
 resource "helm_release" "grafana" {
   // TODO this is off on kubernetes 1.25 because of podSecurityPolicy deprecation
-  count             = 1
+  count             = local.deployment_configs.grafana.count
   name              = "grafana"
   chart             = "${local.project_root_path}/grafana"
   dependency_update = true

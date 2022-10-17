@@ -1,4 +1,5 @@
 resource "kubernetes_persistent_volume_claim" "ethereum_pvc" {
+  count = local.deployment_configs.ethereum_pvc.count
   metadata {
     name      = "ethereum-pvc"
     namespace = "ms"
@@ -19,7 +20,7 @@ resource "kubernetes_persistent_volume_claim" "ethereum_pvc" {
 }
 
 resource "helm_release" "ethereum_storage" {
-  count             = 1
+  count             = local.deployment_configs.ethereum_storage.count
   name              = "ethereum-storage"
   repository        = "https://charts.bitnami.com/bitnami"
   chart             = "postgresql"

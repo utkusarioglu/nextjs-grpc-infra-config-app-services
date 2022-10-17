@@ -1,5 +1,5 @@
 resource "kubernetes_persistent_volume" "ethereum_pv" {
-  count = 1
+  count = local.deployment_configs.ethereum_pv.count
 
   metadata {
     name = "ethereum-pv"

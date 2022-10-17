@@ -1,5 +1,5 @@
 resource "helm_release" "ms" {
-  count             = 1
+  count             = local.deployment_configs.ms.count
   name              = "ms"
   chart             = "${local.project_root_path}/ms/.helm"
   dependency_update = true

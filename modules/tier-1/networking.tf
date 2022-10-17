@@ -1,5 +1,5 @@
 resource "helm_release" "networking" {
-  count             = 0
+  count             = local.deployment_configs.networking.count
   name              = "networking"
   chart             = "${var.project_root_path}/networking"
   dependency_update = true

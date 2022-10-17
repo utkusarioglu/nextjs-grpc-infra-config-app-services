@@ -1,5 +1,5 @@
 resource "helm_release" "secrets" {
-  count             = 1
+  count             = local.deployment_configs.secrets.count
   name              = "secrets"
   chart             = "${var.project_root_path}/secrets"
   dependency_update = true

@@ -1,5 +1,5 @@
 resource "helm_release" "cert_manager" {
-  count             = 1
+  count             = local.deployment_configs.cert_manager.count
   name              = "cert-manager"
   chart             = "cert-manager"
   repository        = "https://charts.jetstack.io"
