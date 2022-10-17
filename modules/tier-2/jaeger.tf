@@ -1,5 +1,5 @@
 resource "helm_release" "jaeger" {
-  count             = 1
+  count             = local.deployment_configs.jaeger.count
   name              = "jaeger"
   chart             = "${local.project_root_path}/jaeger"
   dependency_update = true

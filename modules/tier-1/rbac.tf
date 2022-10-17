@@ -1,5 +1,5 @@
 resource "helm_release" "rbac" {
-  count             = 0
+  count             = local.deployment_configs.rbac.count
   name              = "rbac"
   chart             = "${var.project_root_path}/rbac"
   dependency_update = true

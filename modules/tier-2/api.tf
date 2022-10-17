@@ -1,5 +1,5 @@
 resource "helm_release" "api" {
-  count             = 1
+  count             = local.deployment_configs.api.count
   name              = "api"
   chart             = "${local.project_root_path}/api/.helm"
   dependency_update = true

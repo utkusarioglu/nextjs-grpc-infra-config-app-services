@@ -1,5 +1,5 @@
 resource "helm_release" "certificates" {
-  count             = 1
+  count             = local.deployment_configs.certificates.count
   name              = "certificates"
   chart             = "${var.project_root_path}/certificates"
   dependency_update = true

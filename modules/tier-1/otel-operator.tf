@@ -1,5 +1,5 @@
 resource "helm_release" "otel_operator" {
-  count             = 1
+  count             = local.deployment_configs.otel_operator.count
   name              = "otel-operator"
   chart             = "opentelemetry-operator"
   repository        = "https://open-telemetry.github.io/opentelemetry-helm-charts"
