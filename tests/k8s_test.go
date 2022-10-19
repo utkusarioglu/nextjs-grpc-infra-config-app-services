@@ -4,18 +4,48 @@ import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/k8s"
-	"github.com/gruntwork-io/terratest/modules/logger"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"github.com/stretchr/testify/assert"
 )
+
+var namespaces = []string{
+	"api",
+	"ms",
+	"observability",
+	"cert-manager",
+}
+
+var services = []string{
+	"api",
+	"ms",
+}
 
 func TestK8s(t *testing.T) {
 	t.Parallel()
-	test_structure.RunTestStage(t, "k8s", func() {
-		options := k8s.NewKubectlOptions("", "", "api")
-		ingresses := k8s.ListIngresses(t, options, v1.ListOptions{})
-		for _, ingress := range ingresses {
-			logger.Log(t, ingress.Status.String())
-		}
+
+	test_structure.RunTestStage(t, "K8s_namespaces", func() {
+		t.Run("group", func(t *testing.T) {
+			for _, namespace := range namespaces {
+				namespace := namespace
+				t.Run(namespace, func(t *testing.T) {
+					t.Parallel()
+					namespaceObject := k8s.GetNamespace(t, &k8s.KubectlOptions{}, namespace)
+					assert.Equal(t, namespace, namespaceObject.ObjectMeta.Name)
+				})
+			}
+		})
+	})
+
+	test_structure.RunTestStage(t, "K8s_services", func() {
+		t.Run("group", func(t *testing.T) {
+			for _, service := range services {
+				service := service
+				t.Run(service, func(t *testing.T) {
+					t.Parallel()
+					serviceObject := k8s.GetNamespace(t, &k8s.KubectlOptions{}, service)
+					assert.Equal(t, service, serviceObject.ObjectMeta.Name)
+				})
+			}
+		})
 	})
 }
