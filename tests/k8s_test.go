@@ -13,11 +13,13 @@ var namespaces = []string{
 	"ms",
 	"observability",
 	"cert-manager",
+	"cat",
 }
 
 var services = []string{
 	"api",
 	"ms",
+	"dog",
 }
 
 func TestK8s(t *testing.T) {
