@@ -1,15 +1,15 @@
 version: "3.9"
 
 services:
-  nextjs-grpc-infra-config-app:
-    container_name: nextjs-grpc-infra-config-app
+  nextjs-grpc-infra-config-app-services:
+    container_name: nextjs-grpc-infra-config-app-services
     image: utkusarioglu/tf-devcontainer:1.2.17
     environment:
       TZ: Etc/UTC0
     volumes:
       - type: bind
         source: ..
-        target: /utkusarioglu-com/projects/nextjs-grpc/infra/configs/app
+        target: /utkusarioglu-com/projects/nextjs-grpc/infra/configs/app/services
 
       - type: bind
         source: ../../../../api

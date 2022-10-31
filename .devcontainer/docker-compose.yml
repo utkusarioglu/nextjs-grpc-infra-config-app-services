@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  nextjs-grpc-infra-config-app:
+  nextjs-grpc-infra-config-app-services:
     command: /bin/sh -c "while sleep 1000; do :; done"
     volumes:
       - type: volume
@@ -19,8 +19,8 @@ services:
 
 volumes:
   vscode-extensions:
-    name: nextjs-grpc-infra-config-app-vscode-extensions
+    name: nextjs-grpc-infra-config-app-services-vscode-extensions
   vscode-extensions-insiders:
-    name: nextjs-grpc-infra-config-app-vscode-extensions-insiders
+    name: nextjs-grpc-infra-config-app-services-vscode-extensions-insiders
   go:
-    name: nextjs-grpc-infra-config-app-go
+    name: nextjs-grpc-infra-config-app-services-go
