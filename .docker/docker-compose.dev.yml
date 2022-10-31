@@ -3,59 +3,74 @@ version: "3.9"
 services:
   nextjs-grpc-infra-config-app-services:
     container_name: nextjs-grpc-infra-config-app-services
-    image: utkusarioglu/tf-devcontainer:1.2.17
+    image: utkusarioglu/tf-devcontainer:1.2.18
+    extra_hosts:
+      services.app.configs.infra.nextjs-grpc.projects.utkusarioglu.com: host-gateway
+      local.targets.infra.nextjs-grpc.projects.utkusarioglu.com: host-gateway
+      nextjs-grpc.utkusarioglu.com: host-gateway
     environment:
       TZ: Etc/UTC0
+      VAULT_ADDR: http://nextjs-grpc.utkusarioglu.com:8200
     volumes:
       - type: bind
         source: ..
         target: /utkusarioglu-com/projects/nextjs-grpc/infra/configs/app/services
+      - type: bind
+        source: ../../../../../infra/configs/app/security
+        target: /utkusarioglu-com/projects/nextjs-grpc/infra/configs/app/security
+      - type: bind
+        source: ../../../../../infra/configs/app/security/artifacts/.vault-token
+        target: /home/terraform/.vault-token
 
       - type: bind
-        source: ../../../../api
+        source: ..
+        target: /utkusarioglu-com/projects/nextjs-grpc/infra/configs/app/security
+
+      - type: bind
+        source: ../../../../../api
         target: /utkusarioglu-com/projects/nextjs-grpc/api
         read_only: true
       - type: bind
-        source: ../../../../certificates
+        source: ../../../../../certificates
         target: /utkusarioglu-com/projects/nextjs-grpc/certificates
         read_only: true
       - type: bind
-        source: ../../../../grafana
+        source: ../../../../../grafana
         target: /utkusarioglu-com/projects/nextjs-grpc/grafana
         read_only: true
       - type: bind
-        source: ../../../../jaeger
+        source: ../../../../../jaeger
         target: /utkusarioglu-com/projects/nextjs-grpc/jaeger
         read_only: true
       - type: bind
-        source: ../../../../loki
+        source: ../../../../../loki
         target: /utkusarioglu-com/projects/nextjs-grpc/loki
         read_only: true
       - type: bind
-        source: ../../../../ms
+        source: ../../../../../ms
         target: /utkusarioglu-com/projects/nextjs-grpc/ms
         read_only: true
       - type: bind
-        source: ../../../../networking
+        source: ../../../../../networking
         target: /utkusarioglu-com/projects/nextjs-grpc/networking
         read_only: true
       - type: bind
-        source: ../../../../otel-collectors
+        source: ../../../../../otel-collectors
         target: /utkusarioglu-com/projects/nextjs-grpc/otel-collectors
         read_only: true
       - type: bind
-        source: ../../../../prometheus
+        source: ../../../../../prometheus
         target: /utkusarioglu-com/projects/nextjs-grpc/prometheus
         read_only: true
       - type: bind
-        source: ../../../../rbac
+        source: ../../../../../rbac
         target: /utkusarioglu-com/projects/nextjs-grpc/rbac
         read_only: true
       - type: bind
-        source: ../../../../secrets
+        source: ../../../../../secrets
         target: /utkusarioglu-com/projects/nextjs-grpc/secrets
         read_only: true
       - type: bind
-        source: ../../../../e2e
+        source: ../../../../../e2e
         target: /utkusarioglu-com/projects/nextjs-grpc/e2e
         read_only: true
