@@ -3,19 +3,19 @@ resource "vault_auth_backend" "userpass" {
   type  = "userpass"
 }
 
-resource "vault_generic_endpoint" "student" {
-  count = local.deployment_configs.vault.count
-  depends_on = [
-    vault_auth_backend.userpass[0]
-  ]
-  # path                 = "auth/userpass/users/utkusarioglu"
+resource "vault_generic_endpoint" "utkusarioglu" {
+  count                = local.deployment_configs.vault.count
   path                 = "auth/${vault_auth_backend.userpass[0].path}/users/utkusarioglu"
   ignore_absent_fields = true
 
   data_json = <<-EOT
   {
-    "policies": ["admins", "eaas-client"],
+    "policies": ["admin", "eaas-client"],
     "password": "pass1"
   }
   EOT
+
+  depends_on = [
+    vault_auth_backend.userpass[0]
+  ]
 }

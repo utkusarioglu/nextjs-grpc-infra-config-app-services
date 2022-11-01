@@ -45,6 +45,9 @@ locals {
       prometheus = {
         count = 1
       }
+      kubernetes_dashboard = {
+        count = 1
+      }
     }
 
     ethereum_storage = {
@@ -74,6 +77,9 @@ locals {
       }
       prometheus = {
         count = 1
+      }
+      kubernetes_dashboard = {
+        count = 0
       }
     }
   }
