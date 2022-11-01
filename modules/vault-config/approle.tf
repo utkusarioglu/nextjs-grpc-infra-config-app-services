@@ -1,13 +1,17 @@
 resource "vault_auth_backend" "approle" {
-  type = "approle"
+  count = local.deployment_configs.vault.count
+  type  = "approle"
 }
 
 resource "vault_approle_auth_backend_role" "web_app" {
+  count = local.deployment_configs.vault.count
   depends_on = [
-    vault_auth_backend.approle
+    vault_auth_backend.approle[0]
   ]
-  role_name          = "web-app"
-  token_policies     = ["web_app"]
+  role_name = "web-app"
+  token_policies = [
+    vault_policy.web_app[0].name
+  ]
   token_ttl          = 60
   token_max_ttl      = 4 * 60
   token_num_uses     = 3
