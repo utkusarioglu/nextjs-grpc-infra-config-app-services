@@ -5,3 +5,5 @@ tld                   = "com"
 
 # # Has to match k3d config
 persistent_volumes_root = "/var/lib/rancher/k3s/storage"
+secrets_path            = "secrets"
+assets_path             = "assets"

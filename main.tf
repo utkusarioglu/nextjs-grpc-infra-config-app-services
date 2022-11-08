@@ -2,6 +2,8 @@ module "vault_config" {
   source = "./modules/vault-config"
 
   deployment_mode = var.deployment_mode
+  secrets_path    = var.secrets_path
+  assets_path     = var.assets_path
 }
 
 module "app_tier_1" {

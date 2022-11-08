@@ -1,3 +1,3 @@
 path "secrets/mysql/web-app" {
-  capabilities = [ "read" ]
+  capabilities = [ "list", "read" ]
 }

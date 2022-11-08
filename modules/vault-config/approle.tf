@@ -10,7 +10,8 @@ resource "vault_approle_auth_backend_role" "web_app" {
   ]
   role_name = "web-app"
   token_policies = [
-    vault_policy.web_app[0].name
+    # vault_policy.web_app[0].name
+    vault_policy.all["policies/web-app.policy.hcl"].name
   ]
   token_ttl          = 60
   token_max_ttl      = 4 * 60
