@@ -8,14 +8,18 @@ services:
       services.app.configs.infra.nextjs-grpc.projects.utkusarioglu.com: host-gateway
       local.targets.infra.nextjs-grpc.projects.utkusarioglu.com: host-gateway
       nextjs-grpc.utkusarioglu.com: host-gateway
-      vault-ui.nextjs-grpc.utkusarioglu.com: host-gateway
+      vault.nextjs-grpc.utkusarioglu.com: host-gateway
     environment:
       TZ: Etc/UTC0
       VAULT_ADDR: https://vault.nextjs-grpc.utkusarioglu.com
     volumes:
       - type: bind
+        source: ../.certs/intermediate/certs/intermediate.crt
+        target: /etc/ssl/certs/ca-certificates.crt
+      - type: bind
         source: ..
         target: /utkusarioglu-com/projects/nextjs-grpc/infra/configs/app/services
+
       - type: bind
         source: ../../../../../infra/configs/app/security
         target: /utkusarioglu-com/projects/nextjs-grpc/infra/configs/app/security
