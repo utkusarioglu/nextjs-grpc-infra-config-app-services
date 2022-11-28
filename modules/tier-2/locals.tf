@@ -50,6 +50,39 @@ locals {
       }
     }
 
+    up_till_cert_manager = {
+      api = {
+        count = 0
+      }
+      grafana = {
+        count = 0
+      }
+      jaeger = {
+        count = 0
+      }
+      loki = {
+        count = 0
+      }
+      ms = {
+        count = 0
+      }
+      otel_collectors = {
+        count = 0
+      }
+      ethereum_pvc = {
+        count = 0
+      }
+      ethereum_storage = {
+        count = 0
+      }
+      prometheus = {
+        count = 0
+      }
+      kubernetes_dashboard = {
+        count = 0
+      }
+    }
+
     ethereum_storage = {
       api = {
         count = 0

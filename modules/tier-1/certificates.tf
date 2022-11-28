@@ -11,6 +11,24 @@ resource "helm_release" "certificates" {
     value = "${var.sld}.${var.tld}"
   }
 
+  set {
+    name  = "vaultIssuerRef.secretName"
+    value = kubernetes_secret_v1.issuer[0].metadata[0].name
+  }
+
+  set {
+    name  = "vaultIssuerRef.mountPath"
+    value = var.vault_kubernetes_mount_path
+  }
+
+  set {
+    name = "vaultIssuerRef.caBundle"
+    value = base64encode(join("", [
+      file(".certs/intermediate/intermediate.crt"),
+      file(".certs/root/root.crt")
+    ]))
+  }
+
   depends_on = [
     helm_release.cert_manager[0]
   ]

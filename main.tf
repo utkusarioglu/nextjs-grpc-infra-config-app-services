@@ -9,13 +9,14 @@ module "vault_config" {
 module "app_tier_1" {
   source = "./modules/tier-1"
 
-  project_root_path       = local.project_root_path
-  helm_timeout_unit       = var.helm_timeout_unit
-  helm_atomic             = var.helm_atomic
-  sld                     = var.sld
-  tld                     = var.tld
-  persistent_volumes_root = var.persistent_volumes_root
-  deployment_mode         = var.deployment_mode
+  project_root_path           = local.project_root_path
+  helm_timeout_unit           = var.helm_timeout_unit
+  helm_atomic                 = var.helm_atomic
+  sld                         = var.sld
+  tld                         = var.tld
+  persistent_volumes_root     = var.persistent_volumes_root
+  deployment_mode             = var.deployment_mode
+  vault_kubernetes_mount_path = module.vault_config.vault_kubernetes_mount_path
 
   depends_on = [
     module.vault_config

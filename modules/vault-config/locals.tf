@@ -11,6 +11,12 @@ locals {
         count = 0
       }
     }
+
+    up_till_cert_manager = {
+      vault = {
+        count = 1
+      }
+    }
   }
 
   deployment_configs = local.deployment_config_presets[var.deployment_mode]

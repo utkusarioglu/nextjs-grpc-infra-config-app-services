@@ -29,3 +29,8 @@ variable "deployment_mode" {
   type        = string
   description = "Specify a mode that determines which resources will be deployed. Example: 'all' deploys everything"
 }
+
+variable "vault_kubernetes_mount_path" {
+  type        = string
+  description = "Mount path for the kubernetes auth backend of Vault"
+}

@@ -13,4 +13,5 @@ provider "kubernetes" {
   config_context = "k3d-${var.cluster_name}"
 }
 
-provider "vault" {}
+provider "vault" {
+}
