@@ -13,7 +13,8 @@ resource "helm_release" "certificates" {
 
   set {
     name  = "vaultIssuerRef.secretName"
-    value = kubernetes_secret_v1.issuer[0].metadata[0].name
+    value = kubernetes_secret_v1.issuer["api"].metadata[0].name
+    # value = "issuer-service-account-token"
   }
 
   set {

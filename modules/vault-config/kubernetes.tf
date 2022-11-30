@@ -16,7 +16,7 @@ resource "vault_kubernetes_auth_backend_role" "issuer" {
   backend                          = vault_auth_backend.kubernetes[0].path
   role_name                        = "issuer"
   bound_service_account_names      = ["issuer"]
-  bound_service_account_namespaces = ["cert-manager"]
+  bound_service_account_namespaces = local.deployment_configs.namespaces.for_each
   token_ttl                        = 3600
   token_policies = [
     vault_policy.all["policies/example.policy.hcl"].name,

@@ -19,7 +19,11 @@
 # }
 
 resource "vault_policy" "all" {
-  for_each = local.deployment_configs.vault.count == 0 ? [] : fileset("${var.assets_path}", "policies/*.policy.hcl")
-  name     = replace(trimsuffix(basename(each.key), ".policy.hcl"), "-", "_")
-  policy   = file("${var.assets_path}/${each.key}")
+  for_each = (
+    local.deployment_configs.vault.count == 0
+    ? [] :
+    fileset("${var.assets_path}", "policies/*.policy.hcl")
+  )
+  name   = replace(trimsuffix(basename(each.key), ".policy.hcl"), "-", "_")
+  policy = file("${var.assets_path}/${each.key}")
 }
