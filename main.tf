@@ -17,6 +17,8 @@ module "app_tier_1" {
   persistent_volumes_root     = var.persistent_volumes_root
   deployment_mode             = var.deployment_mode
   vault_kubernetes_mount_path = module.vault_config.vault_kubernetes_mount_path
+  tls_crt                     = local.certs.intermediate.cert
+  ca_crt                      = local.certs.ca.cert
 
   depends_on = [
     module.vault_config

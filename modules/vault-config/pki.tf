@@ -1,12 +1,3 @@
-# resource "vault_auth_backend" "pki" {
-#   count = local.deployment_configs.vault.count
-#   type  = "pki"
-
-#   tune {
-#     max_lease_ttl = "8760h"
-#   }
-# }
-
 resource "vault_mount" "pki" {
   count                 = local.deployment_configs.vault.count
   type                  = "pki"
@@ -15,7 +6,6 @@ resource "vault_mount" "pki" {
 }
 
 resource "vault_pki_secret_backend_root_cert" "pki" {
-  # depends_on            = [vault_mount.pki]
   count                = local.deployment_configs.vault.count
   backend              = vault_mount.pki[0].path
   type                 = "internal"
@@ -26,8 +16,6 @@ resource "vault_pki_secret_backend_root_cert" "pki" {
   key_type             = "ec"
   key_bits             = 256
   exclude_cn_from_sans = true
-  # ou                   = "My OU"
-  # organization         = "My organization"
 }
 
 resource "vault_pki_secret_backend_config_urls" "pki" {
@@ -40,17 +28,17 @@ resource "vault_pki_secret_backend_config_urls" "pki" {
   ]
 }
 
-resource "vault_pki_secret_backend_role" "example" {
+resource "vault_pki_secret_backend_role" "services" {
   count              = local.deployment_configs.vault.count
   backend            = vault_mount.pki[0].path
-  name               = "example"
+  name               = "services"
   ttl                = 3600
   key_type           = "ec"
   key_bits           = 256
   allow_subdomains   = false
   require_cn         = false
   key_usage          = ["ServerAuth"]
-  max_ttl            = 36 * 24 * 3600
+  max_ttl            = 36 * 24 * 60 * 60
   generate_lease     = false
   allow_bare_domains = true
   allow_glob_domains = true

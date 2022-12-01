@@ -2,11 +2,11 @@ path "pki*" {
    capabilities = ["read", "list"]
 }
 
-path "pki/sign/example" {
+path "pki/sign/services" {
    capabilities = ["create", "update"] 
 }
 
-path "pki/issue/example" { 
+path "pki/issue/services" { 
   capabilities = ["create"] 
 }
 

@@ -1,4 +1,4 @@
-resource "kubernetes_service_account" "issuer" {
+resource "kubernetes_service_account" "services_issuer" {
   depends_on = [
     kubernetes_namespace.all
   ]
@@ -9,15 +9,15 @@ resource "kubernetes_service_account" "issuer" {
   )
 
   metadata {
-    name      = "issuer"
+    name      = "services-issuer"
     namespace = each.key
   }
 }
 
 
-resource "kubernetes_secret_v1" "issuer" {
+resource "kubernetes_secret_v1" "services_issuer" {
   depends_on = [
-    kubernetes_service_account.issuer
+    kubernetes_service_account.services_issuer
   ]
   for_each = (
     local.deployment_configs.cert_manager.count > 0
@@ -25,11 +25,11 @@ resource "kubernetes_secret_v1" "issuer" {
     : set()
   )
   metadata {
-    name      = "issuer-service-account-token"
+    name      = "services-issuer-service-account-token"
     namespace = each.key
     annotations = {
       "kubernetes.io/service-account.name" = (
-        kubernetes_service_account.issuer[each.key].metadata[0].name
+        kubernetes_service_account.services_issuer[each.key].metadata[0].name
       )
     }
   }

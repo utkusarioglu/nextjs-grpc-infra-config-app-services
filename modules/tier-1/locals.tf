@@ -83,4 +83,15 @@ locals {
   }
 
   deployment_configs = local.deployment_config_presets[var.deployment_mode]
+
+  certs = {
+    vault = {
+      cert = var.tls_crt
+      ca   = var.ca_crt
+      bundle = join("", [
+        var.tls_crt,
+        var.ca_crt
+      ])
+    }
+  }
 }

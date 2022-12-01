@@ -8,7 +8,7 @@ resource "helm_release" "certificates" {
 
   set {
     name  = "vaultIssuerRef.secretName"
-    value = kubernetes_secret_v1.issuer["api"].metadata[0].name
+    value = kubernetes_secret_v1.services_issuer["api"].metadata[0].name
   }
 
   set {
@@ -17,11 +17,8 @@ resource "helm_release" "certificates" {
   }
 
   set {
-    name = "vaultIssuerRef.caBundle"
-    value = base64encode(join("", [
-      file(".certs/intermediate/intermediate.crt"),
-      file(".certs/root/root.crt")
-    ]))
+    name  = "vaultIssuerRef.caBundle"
+    value = base64encode(local.certs.vault.bundle)
   }
 
   depends_on = [
