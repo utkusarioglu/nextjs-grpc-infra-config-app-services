@@ -7,14 +7,8 @@ resource "helm_release" "certificates" {
   atomic            = var.helm_atomic
 
   set {
-    name  = "publicDomainName"
-    value = "${var.sld}.${var.tld}"
-  }
-
-  set {
     name  = "vaultIssuerRef.secretName"
     value = kubernetes_secret_v1.issuer["api"].metadata[0].name
-    # value = "issuer-service-account-token"
   }
 
   set {
